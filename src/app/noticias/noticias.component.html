@@ -1,0 +1,67 @@
+<h2>
+    Cadastrar Notícia
+</h2>
+<li *ngFor="let noticia of noticias">
+    <p (click)="mostrar(noticia)">{{noticia.titulo}}</p>
+    <p *ngIf="noticia.visivel">
+     {{noticia.descricao}}
+     {{noticia.data}}
+     {{noticia.indicacao}}
+     {{noticia.categoria}}
+     {{noticia.tags}}
+     {{noticia.editoria}}
+     <br> 
+     <button (click)="fechar(noticia)">Fechar</button>
+     <button (click)="editar(noticia)">Editar</button>
+     <button (click)="excluir(noticia)">Excluir</button>
+    </p>
+</li>
+   
+<form #cadastro="ngForm" (submit)="salvar()">
+    <div>
+      <label for="titulo">Título: </label>
+      <input type="text" id="titulo" name="titulo" [(ngModel)]="titulo" required>
+      <br>
+      <label for ="descricao" >
+        Descrição:<br>
+        <textarea cols=60 id="opiniao" rows="10" name="descricao" maxlength="500" wrap="hard" [(ngModel)]="descricao" required></textarea>
+      </label>
+    </div>   
+   
+
+Data:
+<div>
+<input [(ngModel)]="data" name="dataNoticia" type="date" required>
+<p>Indicação se a notícia está publicada:</p>
+  
+  <label for="sim"> <input [(ngModel)]="indicacao" type="checkbox" id="sim" name="sim" checked>SIM</label>
+</div>
+
+<br>
+Categoria:
+<select id="categoria" name="categoriaNoticia" [(ngModel)]="categoria">
+    <option value="1">Política</option>
+    <option value="2">Economia</option>
+    <option value="3">Esporte</option>
+    <option value="4">Entretenimento</option>
+</select>
+<br>
+Tags:
+<select multiple name="teste"  [(ngModel)]="tags">
+    <option value="1">Política</option>
+    <option value="2">Economia</option>
+    <option value="3">Esporte</option>
+    <option value="4">Entretenimento</option>
+</select>
+
+<form>
+<label for="editoria">Editoria: </label><br>
+    <input type="radio" id="politica" name="politica" value="politica" [(ngModel)]="politica" required>Política<br>
+    <input type="radio" id="economia" name="economia" value="economia" [(ngModel)]="economia" required>Economia<br>
+    <input type="radio" id="esporte" name="esporte" value="esporte" [(ngModel)]="esporte" required>Esporte<br>
+    <input type="radio" id="entretenimento" name="entretenimento" value="entretenimento" [(ngModel)]="entretenimento" required>Entretenimento
+
+</form>
+<button type="submit" [disabled]="!cadastro.form.valid">Salvar</button>
+
+
